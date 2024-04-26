@@ -1,16 +1,19 @@
 <?php
 
 return [
-    'single' => 'Builder',
-    'plural' => 'Builders',
-    'breadcrumb' => 'Builder',
-    'title' => 'Builder',
-    'navigation_label' => 'Builder',
-    'navigation_group' => 'Moox Builder',
-    'totalone' => 'Builder One',
-    'totaltwo' => 'Builder Two',
-    'totalthree' => 'Builder Three',
+    'single' => 'Session',
+    'plural' => 'Sessions',
+    'breadcrumb' => 'Session',
+    'title' => 'Sessions',
+    'navigation_label' => 'Sessions',
+    'navigation_group' => 'Moox User',
+    'totalone' => 'Active Sessions',
+    'totaltwo' => 'Unused Sessions',
+    'totalthree' => 'Expired Sessions',
     'name' => 'Name',
     'started_at' => 'Started at',
     'failed' => 'failed',
+    'user_id' => 'User ID',
+    'id' => 'Session',
+    'ip_address' => 'IP-Address',
 ];

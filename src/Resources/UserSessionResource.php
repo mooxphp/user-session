@@ -1,36 +1,40 @@
 <?php
 
-namespace Moox\Builder\Resources;
+namespace Moox\UserSession\Resources;
 
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Moox\Builder\Models\Item;
-use Moox\Builder\Resources\BuilderResource\Pages\ListPage;
-use Moox\Builder\Resources\BuilderResource\Widgets\BuilderWidgets;
+use Moox\UserSession\Models\UserSession;
+use Moox\UserSession\Resources\UserSessionResource\Pages\ListPage;
+use Moox\UserSession\Resources\UserSessionResource\Widgets\UserSessionWidgets;
 
-class BuilderResource extends Resource
+class UserSessionResource extends Resource
 {
-    protected static ?string $model = Item::class;
+    protected static ?string $model = UserSession::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                //TextInput::make('id')
+                //    ->maxLength(255),
+                TextInput::make('user_id')
                     ->maxLength(255),
-                DateTimePicker::make('started_at'),
-                DateTimePicker::make('finished_at'),
-                Toggle::make('failed')
-                    ->required(),
+                TextInput::make('ip_address')
+                    ->maxLength(255),
+                TextInput::make('user_agent')
+                    ->maxLength(255),
+                //Textarea::make('payload'),
+                //TextInput::make('last_activity')
+                //    ->maxLength(255),
             ]);
     }
 
@@ -38,18 +42,17 @@ class BuilderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label(__('builder::translations.name'))
+                TextColumn::make('id')
+                    ->label(__('user-session::translations.id'))
                     ->sortable(),
-                TextColumn::make('started_at')
-                    ->label(__('builder::translations.started_at'))
-                    ->since()
+                TextColumn::make('user_id')
+                    ->label(__('user-session::translations.user_id'))
                     ->sortable(),
-                TextColumn::make('failed')
-                    ->label(__('builder::translations.failed'))
+                TextColumn::make('ip_address')
+                    ->label(__('user-session::translations.ip_address'))
                     ->sortable(),
             ])
-            ->defaultSort('name', 'desc')
+            ->defaultSort('id', 'desc')
             ->actions([
                 EditAction::make(),
             ])
@@ -75,28 +78,28 @@ class BuilderResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            BuilderWidgets::class,
+            UserSessionWidgets::class,
         ];
     }
 
     public static function getModelLabel(): string
     {
-        return __('builder::translations.single');
+        return __('user-session::translations.single');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('builder::translations.plural');
+        return __('user-session::translations.plural');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('builder::translations.navigation_label');
+        return __('user-session::translations.navigation_label');
     }
 
     public static function getBreadcrumb(): string
     {
-        return __('builder::translations.breadcrumb');
+        return __('user-session::translations.breadcrumb');
     }
 
     public static function shouldRegisterNavigation(): bool
@@ -111,11 +114,11 @@ class BuilderResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('builder::translations.navigation_group');
+        return __('user-session::translations.navigation_group');
     }
 
     public static function getNavigationSort(): ?int
     {
-        return config('builder.navigation_sort');
+        return config('user-session.navigation_sort');
     }
 }
